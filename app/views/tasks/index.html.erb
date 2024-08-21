@@ -1,0 +1,17 @@
+<!-- app/views/tasks/index.html.erb -->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-8">
+      <div id="tasks">
+        <% if @tasks.any? %>
+          <% @tasks.each do |task| %>
+            <h4><%= task.title %></h4>
+            <p><%= task.description %></p>
+          <% end %>
+        <% else %>
+          <em>Sorry, no tasks found.</em>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
