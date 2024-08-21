@@ -1,17 +1,56 @@
 <!-- app/views/tasks/index.html.erb -->
 <div id="tasks">
+  <h1>Tasks</h1>
   <% if @tasks.any? %>
-    <% @tasks.each do |task| %>
-      <h4><%= task.title %></h4>
-      <p><%= task.description %></p>
-      <p><%= task.due_date %></p>
-      <% if task.status %>
-        <p>Done</p>
-      <% else %>
-        <p>Not done</p>
-      <% end %>
-    <% end %>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Due date</th>
+          <th>Status</th>
+          <th colspan="3"
+>Actions</th>
+        </tr>
+      </thead>
+      <tdbody>
+        <% @tasks.each do |task| %>
+          <tr>
+            <td>
+              <h4><%= task.title %></h4>
+            </td>
+            <td>
+              <p><%= task.description %></p>
+            </td>
+            <td>
+              <p><%= task.due_date %></p>
+            </td>
+            <td>
+              <% if task.status %>
+                <p>Done</p>
+              <% else %>
+                <p>Not done</p>
+              <% end %>
+            </td>
+            <td class='action'>
+              <%= link_to task_path(task) do %>
+                <h4>Show</h4>
+              <% end %>
+            </td>
+            <td class='action'
+><%= link_to edit_task_path(task) do %>
+                <h4>Edit</h4>
+              <% end %>
+            </td>
+            <td class='action'
+><%= button_to "Destroy", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+            </td>
+          </tr>
+        <% end %>
+      </tdbody>
+    </table>
   <% else %>
     <em>Sorry, no tasks found.</em>
   <% end %>
 </div>
+<div><%= link_to "Add a new task", new_task_path(@task) %></div>
