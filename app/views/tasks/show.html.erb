@@ -1,0 +1,13 @@
+<h4><%= @task.title %></h4>
+<p><%= @task.description %></p>
+<p><%= @task.due_date %></p>
+<% if @task.status %>
+  <p>Done</p>
+<% else %>
+  <p>Not done</p>
+<% end %>
+<div><%= link_to "Back to all tasks", tasks_path %></div>
+<% if current_user == @task.user %>
+  <div><%= link_to "Edit", edit_task_path(@task) %></div>
+  <div><%= link_to "Delete task", task_path(@task), method: :delete, data: { confirm: "Are you sure?" } %></div>
+<% end %>
