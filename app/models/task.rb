@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  has_many :task_users
+  has_many :users, through: :task_users
   belongs_to :user
   validates :title, presence: true
   validates :description, presence: true, length: { minimum: 5 }

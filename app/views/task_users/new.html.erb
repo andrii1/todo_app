@@ -1,0 +1,43 @@
+<!-- app/views/tasks/index.html.erb -->
+<div id="tasks">
+  <h1>Add users to tasks</h1>
+  <% if @users.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tdbody>
+        <%# <% @task_users = TaskUser.joins(:user).where("task_users.task_id = #{@task.id}") %> %>
+        <% @users.each do |user| %>
+          <% @already_assigned = TaskUser.where(task: @task, user: user).exists? %>
+          <tr>
+            <td>
+              <h4><%= user.first_name %></h4>
+            </td>
+            <td>
+              <h4><%= user.last_name %></h4>
+            </td>
+            <td>
+              <h4><%= user.email %></h4>
+            </td>
+            <td>
+              <% if @already_assigned %>
+                <% @task_users = TaskUser.joins(:user).where("task_users.task_id = #{@task.id} AND task_users.user_id = #{user.id}") %>
+                <% task_user = @task_users.first %>
+                <%= button_to "Destroy", task_user_path(task_user), method: :delete, data: { confirm: "Are you sure" } %>
+              <% else %>
+                <%= button_to "Add this user", task_task_users_path(user_id: user.id, task_id: @task.id), method: :post, data: {confirm: "Are you sure you want to add this user?"} %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tdbody>
+    </table>
+  <% else %>
+    <em>Sorry, no users found.</em>
+  <% end %>
+</div>
