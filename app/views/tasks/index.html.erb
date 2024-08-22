@@ -36,12 +36,12 @@
             <td>
               <%# <% @task_users = TaskUser.where(task: task) %>
               <%
-              @task_users = TaskUser.joins(:user).where("task_users.task_id = #{task.id}")
+              # @task_users = TaskUser.joins(:user).where("task_users.task_id = #{task.id}")
               %>
-              <% @task_users.each do |item| %>
-                <p><%= item.user.email%></p>
+              <% task.users.each do |user| %>
+                <p><%= user.email%></p>
               <% end %>
-              <%= link_to new_task_task_user_path(task) do %>
+              <%= link_to task_users_to_task_path(task) do %>
                 <h4>Add users</h4>
               <% end %>
             </td>
