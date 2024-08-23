@@ -4,6 +4,7 @@ class User < ApplicationRecord
   # has_many :task_users
   # has_many :tasks, through: :task_users
   has_and_belongs_to_many :tasks
+  has_many :comments
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
