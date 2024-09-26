@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get "users_to_task", to: "users#users_to_task", as: :users_to_task
     post "add_users_to_task", to: "users#add_users_to_task", as: :add_users_to_task
     delete "delete_users_from_task", to: "users#delete_users_from_task", as: :delete_users_from_task
+    resources :comments, only: [:new, :create]
     # resources :task_users, only: [:new, :create]
   end
   # resources :task_users, only: [:destroy]

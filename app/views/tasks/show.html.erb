@@ -6,6 +6,18 @@
 <% else %>
   <p>Not done</p>
 <% end %>
+<h4>Comments</h4>
+<% if @task.comments.blank? %>
+  Be the first to leave a comment for <%= @task.title %>
+<% else %>
+  <% @task.comments.each do |comment| %>
+    <p><%= comment.text %></p>
+  <% end %>
+<% end %>
+<%= form_with model: @comment, url: task_comments_path(@task) do |f| %>
+  <%= f.text_field :text %>
+  <%= f.submit %>
+<% end %>
 <div><%= link_to "Back to all tasks", tasks_path %></div>
 <% if current_user == @task.users %>
   <div><%= link_to "Edit", edit_task_path(@task) %></div>

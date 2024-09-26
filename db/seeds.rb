@@ -27,6 +27,11 @@ task1.users.create(email: "user4@gmail.com", password: "12345678", first_name: "
 
 puts "tasks and users created"
 
+comment1 = Comment.create!(text: "Good task", task_id: task1.id, user_id: user1.id)
+comment1 = Comment.create!(text: "Nice idea", task_id: task2.id, user_id: user2.id)
+
+puts "comments created"
+
 # recipe = Recipe.create({
 #   title: "Recipe title here",
 #   description: "This is the description",

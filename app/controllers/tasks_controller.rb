@@ -10,14 +10,11 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+    @comment = Comment.new
   end
 
   def create
     @task = Task.new(task_params)
-    # @user = current_user
-    # @task_user.task = @task
-    # @task_user.user = @user
-    # @task_user.save
 
     if @task.save
       @task.users << current_user
