@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
+    @users = User.all
   end
 
   def new
@@ -13,8 +14,13 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.user = current_user
+    # @user = current_user
+    # @task_user.task = @task
+    # @task_user.user = @user
+    # @task_user.save
+
     if @task.save
+      @task.users << current_user
       redirect_to tasks_path(@task)
     else
       render :new

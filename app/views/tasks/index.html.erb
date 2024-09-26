@@ -9,6 +9,7 @@
           <th>Description</th>
           <th>Due date</th>
           <th>Status</th>
+          <th>Collaborators</th>
           <th colspan="3"
 >Actions</th>
         </tr>
@@ -30,6 +31,18 @@
                 <p>Done</p>
               <% else %>
                 <p>Not done</p>
+              <% end %>
+            </td>
+            <td>
+              <%# <% @task_users = TaskUser.where(task: task) %>
+              <%
+              # @task_users = TaskUser.joins(:user).where("task_users.task_id = #{task.id}")
+              %>
+              <% task.users.each do |user| %>
+                <p><%= user.email%></p>
+              <% end %>
+              <%= link_to task_users_to_task_path(task) do %>
+                <h4>Add users</h4>
               <% end %>
             </td>
             <td class='action'>
