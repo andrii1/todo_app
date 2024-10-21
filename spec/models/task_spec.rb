@@ -34,4 +34,10 @@ RSpec.describe Task, type: :model do
     task.valid?
     expect(task.errors[:due_date]).to include("can't be blank")
   end
+
+  it "associate user with a task" do
+    task = Task.create(title: "Buy tomatoes", description: "1kg of tomatoes", status: false, due_date: "2024-12-22")
+    task.users.create(email: "user5@gmail.com", password: "12345678", first_name: "Andrew5", last_name: "Gor")
+    expect(task.users).to exist
+  end
 end
